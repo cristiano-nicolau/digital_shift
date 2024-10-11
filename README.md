@@ -5,7 +5,7 @@
 
 E-commerce has become a major player in the retail landscape, especially in sectors like electronics, where online shopping has seen significant growth.
 
-In recent years, the competition among retailers in Portugal as Worten, Fnac, Rádio Popular, El Corte Inglés, and MediaMarkt has intensified. This competition has driven changes in both the types of products offered and the functionalities of their respective platforms, shaping the way consumers interact with online shopping.
+In recent years, the competition among retailers in Portugal as Worten, Fnac, Rádio Popular, El Corte Inglés, Pc Diga and Staples has intensified. This competition has driven changes in both the types of products offered and the functionalities of their respective platforms, shaping the way consumers interact with online shopping.
 
 By analyzing historical data from Arquivo.pt, it is possible to explore the evolution of these e-commerce platforms, providing insights into how product offerings and platform features have developed over time.
 
@@ -13,7 +13,7 @@ By analyzing historical data from Arquivo.pt, it is possible to explore the evol
 
 The Arquivo.pt platform stores archived web pages dating back to 1996, making it an invaluable resource for examining the historical trajectory of e-commerce in Portugal.
 
-For this project, Arquivo.pt will be the primary data source, allowing us to analyze past versions of e-commerce websites for major electronics retailers such as Worten, Fnac, Rádio Popular, El Corte Inglés, and MediaMarkt.
+For this project, Arquivo.pt will be the primary data source, allowing us to analyze past versions of e-commerce websites for major electronics retailers such as Worten, Fnac, Rádio Popular, El Corte Inglés, Pc Diga and Staples.
 
 By examining archived versions of these websites, we aim to track the changes in product offerings (with a focus on electronic devices like smartphones, laptops, and televisions) and investigate how the functionalities of these platforms have evolved to improve the customer experience.
 
