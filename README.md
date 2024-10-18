@@ -26,24 +26,36 @@ The main objectives of this project are:
 - **Evaluate the evolution of e-commerce platform functionalities**, particularly search mechanisms, filters, and personalization tools, to understand how they improved the user experience.
 - **Examine price trends and promotional strategies** used by different retailers during key sales periods, such as Black Friday or Christmas, to identify which platforms offer the best deals.
 
-### Historical Analysis of Products
+## Methodology
 
-- Temporal Product Analysis: This will focus on how the product offerings in the electronics category have changed across the different retailers. We will look at product categories such as smartphones, laptops, and televisions, exploring which products were introduced, gained popularity, or eventually faded from the market.
-  - Example: Analyzing the rise and fall of products like MP3 players and digital cameras, alongside the emergence of newer devices like smartphones, smartwatches, and smart home assistants (e.g., Google Home, Alexa).
-- Technological Trends: We will examine how technological advancements, such as the introduction of 5G, OLED displays, or powerful processors, have influenced product descriptions, pricing, and consumer demand.
+The methodology for this project involves the following steps:
 
-### Device-Specific Comparison
+1. **Data Collection**: Use the Arquivo.pt API to retrieve archived versions of e-commerce websites for major electronics retailers in Portugal.
+2. **Data Preprocessing**: Clean and structure the data to extract relevant information about product offerings, prices, and platform features.
+3. **Data Analysis**: Analyze the data to identify trends in product categories, pricing, and platform functionalities over time.
+4. **Data Visualization**: Create visualizations (e.g., charts, graphs) to present the findings and insights from the analysis.
 
-- Model Comparison: A detailed comparison of certain devices, such as the iPhone, from its first version to the latest model, analyzing how features have evolved over time.
-- Price Analysis: We will compare the launch prices of these models across different retailers (Worten, Fnac, Rádio Popular, El Corte Inglés, MediaMarkt) and track how these prices changed post-launch, during sales events, or based on other factors like product obsolescence.
+## Expected Results
 
-### Evolution of E-commerce Platform Functionalities
+We expect to uncover valuable insights into the evolution of e-commerce in Portugal, particularly in the electronics sector. By comparing product offerings, prices, and platform features across different retailers, we aim to provide a comprehensive overview of how the industry has changed over time.
 
-- Search and Filter Enhancements: We will track how the search capabilities and filtering options available on these platforms have improved, especially in terms of customization (e.g., price, brand, specifications). This analysis will highlight how these improvements have helped users find products more efficiently.
-- Personalized Recommendations: A review of how retailers have implemented personalization features (e.g., recommended products based on previous searches or purchases) and the role of such functionalities in driving consumer engagement and sales.
+The results of this analysis will shed light on the strategies adopted by retailers to attract customers, improve user experience, and stay competitive in the market. Additionally, we hope to identify patterns in consumer behavior and preferences that have influenced the development of e-commerce platforms in Portugal.
 
-### Comparative Price and Promotion Analysis
+## Packages
 
-- Price Evolution Over Time: This segment will explore how product prices have fluctuated across different retailers over time, focusing on key moments such as new product launches, Black Friday, and holiday seasons.
-- Promotion Strategies: We will examine which retailers tend to offer the most competitive promotions during major sales events (e.g., Black Friday, Cyber Monday) and whether certain stores exhibit patterns of discounting specific product categories more aggressively than others.
-  - Example: Analyzing whether MediaMarkt offers deeper discounts on smartphones compared to Fnac during Black Friday, or if El Corte Inglés focuses more on premium brands.
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- requests
+- beautifulsoup4
+
+## Directory Structure
+
+- `data/`: Contains the data files used in the project.
+
+
+## Team Members
+
+- [Cristiano Nicolau](https://github.com/cristiano-nicolau)[, 108536](mailto:cristianonicolau@ua.pt)
+
