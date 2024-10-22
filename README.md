@@ -50,12 +50,14 @@ The results of this analysis will shed light on the strategies adopted by retail
 - requests
 - beautifulsoup4
 
-## Directory Structure
+## Directory Structure && Files
 
+-`digital_shift.ipynb`: Jupyter notebook explaining the project's context, goals, methodology, and expected results.
 - `data/`: Contains the data files used in the project.
-
+- `data_extractor.ipynb`: Jupyter notebook for extracting data from Arquivo.pt using the Arquivo.pt API.
+- `data_processor.ipynb`: Jupyter notebook for processing and cleaning the extracted data, and web scraping.
 
 ## Team Members
 
-- [Cristiano Nicolau](https://github.com/cristiano-nicolau)[, 108536](mailto:cristianonicolau@ua.pt)
+- [Cristiano Nicolau, 108536](mailto:cristianonicolau@ua.pt)
 
