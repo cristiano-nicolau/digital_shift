@@ -60,4 +60,5 @@ The results of this analysis will shed light on the strategies adopted by retail
 ## Team Members
 
 - [Cristiano Nicolau, 108536](mailto:cristianonicolau@ua.pt)
+- [Tiago Cruz, 108615](mailto:tiagofcruz78@ua.pt)
 
