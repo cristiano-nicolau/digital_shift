@@ -55,7 +55,8 @@ The results of this analysis will shed light on the strategies adopted by retail
 -`digital_shift.ipynb`: Jupyter notebook explaining the project's context, goals, methodology, and expected results.
 - `data/`: Contains the data files used in the project.
 - `data_extractor.ipynb`: Jupyter notebook for extracting data from Arquivo.pt using the Arquivo.pt API.
-- `data_processor.ipynb`: Jupyter notebook for processing and cleaning the extracted data, and web scraping.
+- `data_processor.ipynb`: Jupyter notebook for preprocessing and web scraping the data acquired from Arquivo.pt.
+- `text_processor.ipynb`: Jupyter notebook for text processing and analysis of the data.
 
 ## Team Members
 
