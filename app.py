@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import streamlit as st
-import plotly.graph_objects as go
+import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 from text_model import ProductAnalyzer, ProductVisualizer  # Importe o seu módulo que contém as classes necessárias
