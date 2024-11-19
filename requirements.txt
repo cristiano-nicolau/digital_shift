@@ -1,8 +1,4 @@
 --upgrade pip
 plotly
 matplotlib
-numpy
-pandas
 seaborn
-re
-ast
