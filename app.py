@@ -28,18 +28,19 @@ def main():
         st.write("Brands Available on the Most Sites:")
         st.dataframe(brand_site_counts)
         
-        st.subheader("Brands Associated with Each Site")
+        st.write("Brands Associated with Each Site")
         site_brands = f.groupby('site')['brand'].apply(lambda x: list(set(x))).reset_index(name='brands')
         st.write(site_brands)
         
-        st.subheader("Models Associated with Each Brand")
+        st.write("Models Associated with Each Brand")
         brand_models = f.groupby('brand')['brand_model'].apply(lambda x: list(set(x))).reset_index(name='models')
         st.write(brand_models)
         
-        st.subheader("Categories Associated with Each Model")
+        st.write("Categories Associated with Each Model")
         model_categories = f.groupby('model')['categoria'].apply(lambda x: list(set(x))).reset_index(name='categories')
         st.write(model_categories)
 
+        st.title("Visualizations")
 
         st.subheader("Product Distribution by Category")
         fig = visualizer.plot_category_distribution()  
