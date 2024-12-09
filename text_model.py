@@ -748,7 +748,7 @@ class ProductPricePrediction:
         self.df = df
 
         self.numeric_features = ['HDD_size', 'RAM_size']
-        self.categorical_features = ['site', 'categoria', 'brand', 'brand_model', 'color']
+        self.categorical_features = ['site', 'categoria', 'brand', 'model', 'color']
 
         # processar promocao em binario
         self.df['promocao'] = self.df['promocao'].apply(lambda x: 0 if x == 'Sem Promocao' else 1)

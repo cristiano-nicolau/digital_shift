@@ -36,17 +36,17 @@ def main():
         with col1:
             sites = df['site'].dropna().unique()
             site = st.selectbox("Select the Site", sites)
-            brands = df['brand'].dropna().unique()
-            brand = st.selectbox("Select the Brand", brands)
+            categories = df['categoria'].dropna().unique()
+            category = st.selectbox("Select the Category", categories)
             colors = df['color'].dropna().unique()
             color = st.selectbox("Select the Color", colors)
             ram_sizes = df['RAM_size'].dropna().unique()
             ram_size = st.selectbox("Select the RAM Size", ram_sizes)
 
         with col2:
-            categories = df['categoria'].dropna().unique()
-            category = st.selectbox("Select the Category", categories)
-            models = df[(df['brand'] == brand)]['model'].dropna().unique()
+            brands = df[df['categoria'] == category]['brand'].dropna().unique()
+            brand = st.selectbox("Select the Brand", brands)
+            models = df[df['brand'] == brand]['model'].dropna().unique()
             model = st.selectbox("Select the Model", models)
             hdd_sizes = df['HDD_size'].dropna().unique()
             hdd_size = st.selectbox("Select the HDD Size", hdd_sizes)
