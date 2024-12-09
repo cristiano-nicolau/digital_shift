@@ -1,0 +1,56 @@
+site,promocao,categoria,price_list,min_price,max_price,avg_price,price_variation,discount_percent,brand,model,sub_model,brand_model,color,HDD_size,RAM_size,date
+worten,Saldos Inverno,Smartphone,"[899.99, 1049.0]",899.99,1049.0,974.495,74.505,14.204957102001906,huawei,p,40,p 40,preto,256.0,8.0,20201223
+worten,Saldos Inverno,Smartphone,"[899.99, 1049.0]",899.99,1049.0,974.495,74.505,14.204957102001906,huawei,p,40,p 40,preto,256.0,8.0,20201231
+fnac,Sem Promocao,Smartphone,[1049.99],1049.99,1049.99,1049.99,0.0,0.0,huawei,p,40,p 40,preto,256.0,8.0,20201130
+fnac,Sem Promocao,Smartphone,[1049.99],1049.99,1049.99,1049.99,0.0,0.0,huawei,p,40,p 40,preto,256.0,8.0,20201201
+worten,Sem Promocao,Smartphone,[829.99],829.99,829.99,829.99,0.0,0.0,apple,iphone,8,iphone 8,dourado,64.0,8.0,20180720
+fnac,Sem Promocao,Smartphone,[829.99],829.99,829.99,829.99,0.0,0.0,apple,iphone,8,iphone 8,dourado,64.0,8.0,20180719
+worten,Black Friday,Smartphone,[579.99],579.99,579.99,579.99,0.0,0.0,apple,iphone,8,iphone 8,dourado,64.0,8.0,20181123
+fnac,Sem Promocao,Smartphone,[719.99],719.99,719.99,719.99,0.0,0.0,apple,iphone,8,iphone 8,dourado,64.0,8.0,20181013
+fnac,Black Friday,Smartphone,"[499.99, 549.99]",499.99,549.99,524.99,25.0,9.091074383170602,apple,iphone,8,iphone 8,dourado,64.0,8.0,20191129
+fnac,Black Friday,Smartphone,"[499.99, 549.99]",499.99,549.99,524.99,25.0,9.091074383170602,apple,iphone,8,iphone 8,prateado,64.0,8.0,20191129
+fnac,Sem Promocao,Smartphone,[829.99],829.99,829.99,829.99,0.0,0.0,apple,iphone,8,iphone 8,prateado,64.0,8.0,20181013
+fnac,Sem Promocao,Smartphone,[829.99],829.99,829.99,829.99,0.0,0.0,apple,iphone,8,iphone 8,prateado,64.0,8.0,20180719
+worten,Saldos Verao,Smartphone,"[599.99, 719.99]",599.99,719.99,659.99,60.0,16.666898151363213,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,8.0,20180825
+worten,Black Friday,Smartphone,[449.99],449.99,449.99,449.99,0.0,0.0,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,8.0,20181123
+elcorteingles,Sem Promocao,Smartphone,[799.9],799.9,799.9,799.9,0.0,0.0,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,8.0,20170819
+elcorteingles,Sem Promocao,Smartphone,[919.9],919.9,919.9,919.9,0.0,0.0,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,8.0,20171221
+fnac,Sem Promocao,Smartphone,[533.49],533.49,533.49,533.49,0.0,0.0,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,8.0,20181013
+fnac,Saldos Verao,Smartphone,"[589.99, 719.99]",589.99,719.99,654.99,65.0,18.05580633064348,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,8.0,20180719
+fnac,Sem Promocao,Smartphone,[1049.99],1049.99,1049.99,1049.99,0.0,0.0,apple,iphone,xr,iphone xr,azul,256.0,8.0,20181107
+fnac,Sem Promocao,Smartphone,[1049.99],1049.99,1049.99,1049.99,0.0,0.0,apple,iphone,xr,iphone xr,azul,256.0,8.0,20190423
+fnac,Black Friday,Smartphone,[949.0],949.0,949.0,949.0,0.0,0.0,apple,iphone,xr,iphone xr,azul,256.0,8.0,20191129
+fnac,Black Friday,Smartphone,"[349.99, 449.99]",349.99,449.99,399.99,50.0,22.22271606035689,apple,iphone,7,iphone 7,preto,32.0,8.0,20191129
+worten,Black Friday,Smartphone,[449.99],449.99,449.99,449.99,0.0,0.0,apple,iphone,7,iphone 7,preto,32.0,8.0,20181123
+fnac,Sem Promocao,Smartphone,[779.99],779.99,779.99,779.99,0.0,0.0,apple,iphone,7,iphone 7,preto,32.0,8.0,20170816
+elcorteingles,Sem Promocao,Smartphone,[699.9],699.9,699.9,699.9,0.0,0.0,huawei,p,20,p 20,preto,128.0,8.0,20180503
+elcorteingles,Sem Promocao,Smartphone,"[559.9, 799.9]",559.9,799.9,679.9,120.0,30.003750468808605,huawei,p,20,p 20,preto,128.0,8.0,20191022
+fnac,Sem Promocao,Smartphone,[599.99],599.99,599.99,599.99,0.0,0.0,huawei,p,20,p 20,preto,128.0,8.0,20190422
+elcorteingles,Sem Promocao,Smartphone,[1179.0],1179.0,1179.0,1179.0,0.0,0.0,apple,iphone,xs,iphone xs,dourado,64.0,8.0,20181116
+elcorteingles,Sem Promocao,Smartphone,[1179.0],1179.0,1179.0,1179.0,0.0,0.0,apple,iphone,xs,iphone xs,dourado,64.0,8.0,20190422
+elcorteingles,Sem Promocao,Smartphone,[1279.0],1279.0,1279.0,1279.0,0.0,0.0,apple,iphone,xs,iphone xs,dourado,64.0,8.0,20190906
+fnac,Black Friday,Smartphone,"[829.99, 1069.99]",829.99,1069.99,949.99,120.0,22.430116169309997,apple,iphone,xs,iphone xs,dourado,64.0,8.0,20191129
+fnac,Sem Promocao,Smartphone,[1179.99],1179.99,1179.99,1179.99,0.0,0.0,apple,iphone,xs,iphone xs,dourado,64.0,8.0,20181107
+fnac,Sem Promocao,Smartphone,[1129.85],1129.85,1129.85,1129.85,0.0,0.0,apple,iphone,xs,iphone xs,dourado,64.0,8.0,20190223
+elcorteingles,Sem Promocao,Smartphone,[449.0],449.0,449.0,449.0,0.0,0.0,apple,iphone,6,iphone 6,cinzento,64.0,8.0,20170311
+elcorteingles,Saldos Verao,Smartphone,"[399.0, 449.0]",399.0,449.0,424.0,25.0,11.1358574610245,apple,iphone,6,iphone 6,cinzento,64.0,8.0,20170819
+worten,Black Friday,Smartphone,[259.99],259.99,259.99,259.99,0.0,0.0,apple,iphone,6,iphone 6,cinzento,64.0,8.0,20181123
+worten,Black Friday,Consola,[299.99],299.99,299.99,299.99,0.0,0.0,sony,ps4,slim,ps4 slim,preto,500.0,8.0,20201127
+fnac,Black Friday,Consola,[229.0],229.0,229.0,229.0,0.0,0.0,sony,ps4,slim,ps4 slim,preto,500.0,8.0,20191129
+fnac,Sem Promocao,Consola,[299.99],299.99,299.99,299.99,0.0,0.0,sony,ps4,slim,ps4 slim,preto,500.0,8.0,20170819
+worten,Sem Promocao,Consola,[299.99],299.99,299.99,299.99,0.0,0.0,sony,ps4,slim,ps4 slim,preto,500.0,8.0,20181109
+worten,Sem Promocao,Consola,[339.99],339.99,339.99,339.99,0.0,0.0,sony,ps4,slim,ps4 slim,preto,500.0,8.0,20201220
+worten,Sem Promocao,Consola,[369.99],369.99,369.99,369.99,0.0,0.0,sony,ps4,pro,ps4 pro,preto,1000.0,16.0,20201219
+worten,Sem Promocao,Consola,[369.99],369.99,369.99,369.99,0.0,0.0,sony,ps4,pro,ps4 pro,preto,1000.0,16.0,20201220
+worten,Sem Promocao,Consola,[399.99],399.99,399.99,399.99,0.0,0.0,sony,ps4,pro,ps4 pro,preto,1000.0,16.0,20190130
+worten,Sem Promocao,Consola,[399.99],399.99,399.99,399.99,0.0,0.0,sony,ps4,pro,ps4 pro,preto,1000.0,16.0,20181109
+fnac,Black Friday,Consola,[369.99],369.99,369.99,369.99,0.0,0.0,sony,ps4,pro,ps4 pro,preto,1000.0,16.0,20191129
+fnac,Sem Promocao,Consola,[399.99],399.99,399.99,399.99,0.0,0.0,sony,ps4,pro,ps4 pro,preto,1000.0,16.0,20170819
+fnac,Sem Promocao,Consola,[249.99],249.99,249.99,249.99,0.0,0.0,xbox,one,s,one s,branco,500.0,8.0,20170819
+worten,Black Friday,Consola,[149.0],149.0,149.0,149.0,0.0,0.0,xbox,one,s,one s,branco,500.0,8.0,20181123
+worten,Sem Promocao,Consola,[289.99],289.99,289.99,289.99,0.0,0.0,xbox,one,s,one s,branco,500.0,8.0,20191121
+fnac,Black Friday,Consola,"[195.49, 229.99]",195.49,229.99,212.74,17.25,15.000652202269665,xbox,one,s,one s,branco,500.0,8.0,20191129
+worten,Sem Promocao,Consola,[249.99],249.99,249.99,249.99,0.0,0.0,xbox,one,s,one s,branco,500.0,8.0,20181109
+worten,Sem Promocao,Consola,[249.99],249.99,249.99,249.99,0.0,0.0,xbox,one,s,one s,branco,500.0,8.0,20201209
+worten,Sem Promocao,Consola,[249.99],249.99,249.99,249.99,0.0,0.0,xbox,one,s,one s,branco,500.0,8.0,20201210
+

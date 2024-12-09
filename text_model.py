@@ -7,6 +7,17 @@ import re
 import ast
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pmdarima as pm  
+import warnings
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+warnings.filterwarnings('ignore')
 
 
 
@@ -400,16 +411,14 @@ class ProductVisualizer:
         self.analyser = ProductAnalyzer()
     
     def plot_category_distribution(self):
-        """Distribuição de produtos por categoria"""
-        plt.figure(figsize=(12, 6))
-        category_counts = self.insights['by_category']['total_products']
-        category_counts = category_counts.reset_index()
+        """Distribuição de produtos por categoria baseada nos dados filtrados"""
+        category_counts = self.df.groupby('categoria').size().reset_index(name='total_products')
         category_counts.columns = ['categoria', 'total_products']
+        
         fig = px.bar(
-            category_counts.reset_index(),
+            category_counts,
             x='categoria',
             y='total_products',
-            title='Distribuição de Produtos por Categoria',
             labels={'categoria': 'Categoria', 'total_products': 'Número de Produtos'},
             color='categoria'
         )
@@ -422,13 +431,14 @@ class ProductVisualizer:
     
     def plot_brand_market_share(self):
         """Market share por categoria"""
-        brand_distribution = self.insights['by_category']['brand_distribution']
-        
+        brand_distribution = self.df.groupby(['categoria', 'brand']).size().reset_index(name='product_count')
+        brand_distribution = brand_distribution.pivot(index='categoria', columns='brand', values='product_count').fillna(0)
+
         fig = px.bar(
             brand_distribution,
-            title='Distribuição de Marcas por Categoria',
             labels={'value': 'Número de Produtos', 'index': 'Categoria'},
-            barmode='stack'
+            barmode='stack',
+            color_discrete_sequence=px.colors.qualitative.Plotly + px.colors.qualitative.D3 + px.colors.qualitative.Set3
         )
         fig.update_layout(
             xaxis_title='Categoria',
@@ -436,14 +446,14 @@ class ProductVisualizer:
             legend_title='Marca'
         )
         return fig
-    
     def plot_price_comparison(self):
         """Comparação de preços por marca e categoria"""
-        avg_prices = self.insights['by_brand']['avg_price_by_category']
+
+        avg_prices = self.df.groupby(['categoria', 'brand'])['min_price'].mean()
+
         
         fig = px.bar(
             avg_prices.unstack(),
-            title='Preço Médio por Marca e Categoria',
             labels={'value': 'Preço Médio', 'index': 'Categoria - Marca'},
             barmode='group'
         )
@@ -455,175 +465,105 @@ class ProductVisualizer:
         return fig
 
     def plot_discount_analysis(self):
-        """analise de descontos por marca"""
-        discount_comparison = self.insights['by_brand']['discount_comparison']
-        
-        plt.figure(figsize=(12, 6))
-        discount_comparison.plot(kind='bar', color='lightcoral', edgecolor='black')
-        plt.title('Percentual de Desconto Médio por Marca')
-        plt.xlabel('Marca')
-        plt.ylabel('Desconto Médio (%)')
-        plt.tight_layout()
-        return plt
-    
-    def plot_site_brand_presence(self):
-        """presenca de marcas por site"""
-        site_presence = self.insights['by_brand']['site_presence']
-        
-        plt.figure(figsize=(15, 10))
-        sns.heatmap(site_presence, annot=True, cmap='YlGnBu', fmt='d', linewidths=0.5)
-        plt.title('Presença de Marcas por Site')
-        plt.xlabel('Site')
-        plt.ylabel('Marca')
-        plt.tight_layout()
-        return plt
-
-    def plot_model_series_distribution_iphone8(self):
-        """distribuicao do numero de produtos por modelo"""
-        model_distribution = self.insights['by_model']
-        model_distribution = model_distribution['total_products']
+        """Análise de descontos por marca"""
+        discount_comparison = self.insights['by_brand']['discount_comparison'].reset_index()
+        discount_comparison.columns = ['brand', 'discount_percent']
         
         fig = px.bar(
-            model_distribution,
-            title='Distribuição de Numero de Produtos por Modelo',
-            labels={'value': 'Número de Produtos', 'index': 'Preço'},
-            barmode='group'
+            discount_comparison,
+            x='brand',
+            y='discount_percent',
+            labels={'brand': 'Marca', 'discount_percent': 'Desconto Médio (%)'},
+            color='brand',
+            color_discrete_sequence=px.colors.qualitative.Plotly + px.colors.qualitative.D3 + px.colors.qualitative.Set3
         )
         fig.update_layout(
-            xaxis_title='Preço',
-            yaxis_title='Número de Produtos',
+            title='Percentual de Desconto Médio por Marca',
+            xaxis_title='Marca',
+            yaxis_title='Desconto Médio (%)',
             legend_title='Marca'
         )
         return fig
-        
-    def analyze_temporal_for_product(self, brand, brand_model, hdd, color, site):
-        """
-         analise temporal de preços mínimos para um produto e site especifico.
-        """
-        filtered_df = df_analyzed[
-            (df_analyzed['brand'].str.contains(brand, case=False, na=False)) & 
-            (df_analyzed['brand_model'].str.contains(brand_model, case=False, na=False)) &
-            (df_analyzed['site'].str.contains(site, case=False, na=False)) &
-            ((df_analyzed['HDD_size'] == hdd) | (pd.isna(df_analyzed['HDD_size']) & (hdd is None))) &
-            
-            ((df_analyzed['color'].str.contains(color, case=False, na=False)) if color else True)
-       
-        ]
-        
-        if filtered_df.empty:
-            return None, "Nenhum dado encontrado para o produto e site especificados."
-        
-        try:
-            temporal_data, summary = self.analyser.compare_temporal_analysis(filtered_df)
-        except ValueError as e:
-            return None, str(e)
-        
-        fig = px.line(
-            temporal_data,
-            x='date',
-            y='min_price',
-            color='brand_model',
-            title=f"Preço Mínimo ao Longo do Tempo: {brand} {brand_model} {hdd} {color} - {site}",
-            labels={'date': 'Data', 'min_price': 'Preço Mínimo (€)', 'brand_model': 'Produto'}
+    
+    def plot_site_brand_presence(self):
+        """presenca de marcas por site"""
+        site_brand_presence = self.df.groupby(['brand', 'site']).size().unstack(fill_value=0)
+        print(site_brand_presence)
+        fig = px.imshow(
+            site_brand_presence,
+            labels={"x": "site", "y": "brand", "color": "Presence"},
+            text_auto=True,
+            color_continuous_scale='Peach',
+            aspect="auto"
         )
         
         fig.update_layout(
-            xaxis_title='Data',
-            yaxis_title='Preço Mínimo (€)',
-            legend_title='Produto',
-            hovermode='x unified'
+            xaxis_title="Sites",
+            yaxis_title="Marcas",
+            autosize=True
         )
-        
         return fig
 
-    def analyze_temporal_for_set_of_products(self, dict_of_products):
-        """
-        Analise temporal ao um conjunto de produtos
-        """
+    def plot_model_series_distribution_iphone8(self):
+        """distribuicao do numero de produtos por modelo"""
 
-        all_temporal_data = []
+        model_distribution = self.df.groupby(['brand', 'brand_model']).size().reset_index(name='total_products')
 
-        for product_id, product_params in dict_of_products.items():
-            print(product_id, product_params)
-            brand = product_params.get('brand')
-            brand_model = product_params.get('brand_model')
-            hdd = product_params.get('hdd')
-            color = product_params.get('color')
-            site = product_params.get('site')
-            print(brand, brand_model, hdd, color, site)
-            filtered_df = df_analyzed[
-                (df_analyzed['brand'].str.contains(brand, case=False, na=False)) & 
-                (df_analyzed['brand_model'].str.contains(brand_model, case=False, na=False)) &
-                (df_analyzed['site'].str.contains(site, case=False, na=False))
-            ]
-
-            if hdd is not None:
-                filtered_df = filtered_df[filtered_df['HDD_size'] == hdd]
-
-            if color is not None:
-                filtered_df = filtered_df[filtered_df['color'].str.contains(color, case=False, na=False)]
-
-            if not filtered_df.empty:
-                try:
-                    temporal_data, summary = self.analyser.compare_temporal_analysis(filtered_df)
-                    temporal_data['product_id'] = product_id  # Adiciona o identificador do produto
-                    all_temporal_data.append(temporal_data)
-                except ValueError as e:
-                    continue  
-
-        if not all_temporal_data:
-            return None, "Nenhum dado encontrado para os produtos e sites especificados."
-
-        all_temporal_data_df = pd.concat(all_temporal_data)
-
-        fig = px.line(
-            all_temporal_data_df,
-            x='date',
-            y='min_price',
-            color='product_id',
-            title="Preço Mínimo ao Longo do Tempo para os Produtos",
-            labels={'date': 'Data', 'min_price': 'Preço Mínimo (€)', 'product_id': 'Produto'}
+        fig = px.bar(
+            model_distribution,
+            x='brand_model',
+            y='total_products',
+            color='brand',
+            labels={'total_products': 'Número de Produtos', 'brand_model': 'Modelo', 'brand': 'Marca'},
+            color_discrete_sequence=px.colors.qualitative.Plotly + px.colors.qualitative.D3 + px.colors.qualitative.Set3
         )
         
         fig.update_layout(
-            xaxis_title='Data',
-            yaxis_title='Preço Mínimo (€)',
-            legend_title='Produto',
-            hovermode='x unified'
+            xaxis_title='Modelo',
+            yaxis_title='Número de Produtos',
+            barmode='group',
+            legend_title='Marca'
         )
         
         return fig
-
         
-        
-
+    
     def analyze_discount_distribution(self):
         """
-        Analisa a distribuição de preços em faixas de desconto.
+        Analisa a distribuição de descontos em faixas de desconto utilizando Plotly.
         """
-        # Criar faixas de desconto
         bins = [0, 10, 20, 30, 40, 50, 100]
         labels = ['0-10%', '10-20%', '20-30%', '30-40%', '40-50%', '50%+']
-        df_analyzed['discount_range'] = pd.cut(df_analyzed['discount_percent'], bins=bins, labels=labels)
-        
-        # Contar produtos por faixa
-        discount_distribution = df_analyzed['discount_range'].value_counts().sort_index()
-        
-        # Visualizar a distribuição
-        plt.figure(figsize=(10, 6))
-        discount_distribution.plot(kind='bar', color='skyblue', edgecolor='black')
-        plt.title("Distribuição de Produtos por Faixa de Desconto")
-        plt.xlabel("Faixa de Desconto (%)")
-        plt.ylabel("Quantidade de Produtos")
-        plt.xticks(rotation=45)
-        plt.grid(axis='y', linestyle='--', alpha=0.7)
-        return plt
+
+        self.df['discount_range'] = pd.cut(self.df['discount_percent'], bins=bins, labels=labels)
+
+        discount_distribution = self.df['discount_range'].value_counts().reset_index()
+        discount_distribution.columns = ['discount_range', 'count']
+
+        fig = px.bar(
+            discount_distribution,
+            x='discount_range',
+            y='count',
+            color='count',
+            color_continuous_scale='Peach',
+            text_auto=True,
+            title="Distribuição de Produtos por Faixa de Desconto"
+        )
+        fig.update_layout(
+            xaxis_title="Faixa de Desconto (%)",
+            yaxis_title="Quantidade de Produtos",
+            template="plotly_white",
+            showlegend=False,
+            autosize=True
+        )
+
+        return fig
     
     def compare_temporal_by_category(self):
         """
         comparacao temporal dos precos por categoria
         """
-        temporal_data = df_analyzed.groupby(['categoria', 'date']).agg({
+        temporal_data = self.df.groupby(['categoria', 'date']).agg({
             'min_price': 'mean'
         }).reset_index()
         
@@ -635,7 +575,8 @@ class ProductVisualizer:
             y='min_price',
             color='categoria',
             title="Média de Preços por Categorias ao Longo do Tempo",
-            labels={'date': 'Data', 'min_price': 'Preço Médio (€)', 'categoria': 'Categoria'}
+            labels={'date': 'Data', 'min_price': 'Preço Médio (€)', 'categoria': 'Categoria'},
+            color_discrete_sequence=px.colors.qualitative.Plotly + px.colors.qualitative.D3 + px.colors.qualitative.Set3
         )
         
         fig.update_layout(
@@ -672,26 +613,197 @@ class ProductVisualizer:
         plt.grid(axis='y', linestyle='--', alpha=0.7)
         plt.tight_layout()
         return plt
+    
+    def price_discount_correlation(self):
+        scatter_data = self.df.dropna(subset=['min_price', 'discount_percent', 'site', 'categoria'])
+        scatter_data = scatter_data[scatter_data['discount_percent'] > 0]
+
+        scatter_data['price_with_discount'] = scatter_data['min_price'] * (1 - scatter_data['discount_percent'] / 100)
+
+        fig = px.scatter(
+            scatter_data,
+            x='min_price',
+            y='discount_percent',
+            color='categoria',
+            size='discount_percent', 
+            hover_data=['price_with_discount','title', 'site'], 
+            labels={"min_price": "Preço Mínimo (€)", "discount_percent": "Desconto (%)", "price_with_discount": "Preço com Desconto (€)"}
+        )
+
+        fig.update_layout(
+            xaxis_title="Preço Mínimo (€)",
+            yaxis_title="Desconto (%)",
+            legend_title="Categorias",
+            hovermode="closest"
+        )
+
+        return fig
 
 
 
+    def products_most_discounted(self, num_products, selected_sites):
+        products_discounts = self.df[['site', 'title', 'discount_percent']].dropna()
+        products_discounts = products_discounts[products_discounts['site'].isin(selected_sites)]
+        top_discounts = products_discounts.sort_values(by='discount_percent', ascending=False).head(num_products)
+        fig = px.bar(
+            top_discounts,
+            x='discount_percent',
+            y='title',
+            color='site',
+            orientation='h',
+            text_auto=True,
+            labels={"discount_percent": "Desconto (%)", "title": "Produto"}
+        )
+        fig.update_yaxes(categoryorder='total ascending')
+        fig.update_layout(
+            barmode="stack",
+            xaxis_title="Percentual de Desconto",
+            yaxis_title="Produtos",
+            showlegend=True
+        )
+
+        return fig  
+class TimeSeriesAnalyzer:
+    def __init__(self, df):
+        self.df = df
+        self.df['date'] = pd.to_datetime(self.df['date'], format='%Y%m%d')
+        self.forecasts = {}
+
+    def prepare_time_series(self, brand=None, model=None, color=None, category=None, brand_model=None):
+        filtered_df = self.df.copy()
+
+        if brand:
+            filtered_df = filtered_df[filtered_df['brand'] == brand]
+        if model:
+            filtered_df = filtered_df[filtered_df['model'] == model]
+        if color:
+            filtered_df = filtered_df[filtered_df['color'] == color]
+        if category:
+            filtered_df = filtered_df[filtered_df['categoria'] == category]
+        if brand_model:
+            filtered_df = filtered_df[filtered_df['brand_model'] == brand_model]
+
+        time_series = filtered_df.groupby('date')['min_price'].mean().reset_index()
+        time_series.set_index('date', inplace=True)
+
+        if time_series.empty or len(time_series) < 3:
+            return None
+
+        return time_series
+
+    def forecast_time_series_sarima(self, time_series, forecast_periods):
+        if len(time_series) < 2:
+            return None
+
+        prices = time_series['min_price'].values
+
+        try:
+            sarima_model = pm.auto_arima(
+                prices,
+                seasonal=False,
+                suppress_warnings=True,
+                stepwise=True,
+            )
+
+            sarima_forecast, conf_int = sarima_model.predict(n_periods=forecast_periods, return_conf_int=True)
+
+            # adiciono lhe uma multiplicaçao para ajustar a tendência decrescente
+            decline_factor = 0.975
+            sarima_forecast = sarima_forecast * (decline_factor ** np.arange(0, forecast_periods))
+
+            return {
+                'forecast': sarima_forecast,
+                'conf_int': conf_int
+            }
+        except Exception:
+            return None
+
+    def analyze_product(self, brand, model, color, category, brand_model):
+        time_series = self.prepare_time_series(
+            brand=brand, model=model, color=color, category=category, brand_model=brand_model
+        )
+
+        if time_series is None:
+            return None
+
+        last_date = time_series.index[-1]
+        end_of_2024 = pd.Timestamp('2024-12-31')
+        forecast_periods = (end_of_2024.year - last_date.year) * 12 + (end_of_2024.month - last_date.month)
+
+        if forecast_periods <= 0:
+            return None
+
+        product_forecasts = self.forecast_time_series_sarima(time_series, forecast_periods)
+
+        if product_forecasts:
+            return {
+                'time_series': time_series,
+                'forecasts': product_forecasts
+            }
+        return None
 
 
-# # Executar visualizações
-# visualizer.plot_category_distribution()
-# visualizer.plot_brand_market_share()
-# visualizer.plot_price_comparison()
-# visualizer.plot_discount_analysis()
-# visualizer.plot_site_colors_presence()
-# visualizer.plot_site_brand_presence()
-# visualizer.plot_model_series_distribution_iphone8()
-# visualizer.analyze_temporal_for_product("apple","iphone 8", 64.0,"prateado","fnac")
-# visualizer.analyze_temporal_for_set_of_products({
-#     'iphone_8 - fnac': {'brand': 'apple', 'brand_model': 'iphone 8', 'hdd': 64.0, 'color': 'prateado', 'site': 'fnac'},
-#     'galaxy_s8 - fnac': {'brand': 'samsung', 'brand_model': 'galaxy_s 8', 'hdd': 64.0, 'color': 'azul', 'site': 'fnac'},
-#     'huawei_p20 - elcorteingles' : {'brand': 'huawei', 'brand_model': 'p 20', 'hdd': 128.0, 'color': 'preto', 'site': 'elcorteingles'}
-# })
-# visualizer.analyze_discount_distribution()
-# visualizer.compare_temporal_by_category()
-# visualizer.analyze_price_range(500, 800)
+class ProductPricePrediction:
+    def __init__(self, df):
+        self.df = df
+
+        self.numeric_features = ['HDD_size', 'RAM_size']
+        self.categorical_features = ['site', 'categoria', 'brand', 'brand_model', 'color']
+
+        # processar promocao em binario
+        self.df['promocao'] = self.df['promocao'].apply(lambda x: 0 if x == 'Sem Promocao' else 1)
+
+        # adicionar 'promocao' as features numéricas após a transformação
+        self.numeric_features.append('promocao')
+
+        # scaler para normalizar os valores numéricos, one-hot encoder para as features categóricas
+        # impute com os valores mais frequentes para as features categoricas e com a media para as features numericas
+        self.preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', Pipeline([
+                    ('imputer', SimpleImputer(strategy='mean')),
+                    ('scaler', StandardScaler())
+                ]), self.numeric_features),
+                ('cat', Pipeline([
+                    ('imputer', SimpleImputer(strategy='most_frequent')),
+                    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+                ]), self.categorical_features)
+            ]
+        )
+
+        self.price_model = Pipeline([
+            ('preprocessor', self.preprocessor),
+            ('regressor', RandomForestRegressor(n_estimators=100, random_state=42))
+        ])
+
+    def prepare_data(self, price_column='max_price'):
+        """Prepara os dados para treino."""
+        # dar input de valores medianos para os valores nulos
+        self.df[price_column] = self.df[price_column].fillna(self.df[price_column].median())
+
+        # dividir em features e target, o target é o max preço
+        X = self.df.drop([price_column], axis=1)
+        y = self.df[price_column]
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        return X_train, X_test, y_train, y_test
+
+    def train_model(self):
+        """Treina o modelo para prever os preços."""
+        X_train, X_test, y_train, y_test = self.prepare_data()
+
+        self.price_model.fit(X_train, y_train)
+        predictions = self.price_model.predict(X_test)
+
+        print("Price Prediction Metrics:")
+        print(f"MAE: {mean_absolute_error(y_test, predictions)}")
+        print(f"MSE: {mean_squared_error(y_test, predictions)}")
+        print(f"R2 Score: {r2_score(y_test, predictions)}")
+
+    def predict_price(self, product_data):
+        """Faz a previsão do preço com base nas características do produto."""
+        input_df = pd.DataFrame([product_data])
+        predicted_price = self.price_model.predict(input_df)[0]
+        return predicted_price
 

@@ -4,3 +4,5 @@ seaborn
 numpy==1.26.3
 wordcloud
 networkx
+pmdarima
+sklearn

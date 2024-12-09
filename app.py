@@ -7,7 +7,8 @@ import plotly.graph_objects as go
 import networkx as nx
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-from text_model import ProductAnalyzer, ProductVisualizer  
+from text_model import ProductAnalyzer, ProductVisualizer, TimeSeriesAnalyzer, ProductPricePrediction  
+from datetime import timedelta
 
 def main():
 
@@ -22,12 +23,65 @@ def main():
 
     tab_selection = st.sidebar.radio(
         "Select a Tab",
-        ["Web Site Graph","Web Site WordCloud","Product and Price Analysis"],
+        ["Price Predictor","Web Site Graph","Web Site WordCloud","Product and Price Analysis", "Time Series Analysis"],
         index=0
     )
 
+    if tab_selection == "Price Predictor":
 
-    if tab_selection == "Web Site Graph":
+        df = pd.read_csv('ml_dataset.csv')
+
+        st.subheader("Select a Product to Predict the Price")
+        col1, col2 = st.columns(2)
+        with col1:
+            sites = df['site'].dropna().unique()
+            site = st.selectbox("Select the Site", sites)
+            brands = df['brand'].dropna().unique()
+            brand = st.selectbox("Select the Brand", brands)
+            colors = df['color'].dropna().unique()
+            color = st.selectbox("Select the Color", colors)
+            ram_sizes = df['RAM_size'].dropna().unique()
+            ram_size = st.selectbox("Select the RAM Size", ram_sizes)
+
+        with col2:
+            categories = df['categoria'].dropna().unique()
+            category = st.selectbox("Select the Category", categories)
+            models = df[(df['brand'] == brand)]['model'].dropna().unique()
+            model = st.selectbox("Select the Model", models)
+            hdd_sizes = df['HDD_size'].dropna().unique()
+            hdd_size = st.selectbox("Select the HDD Size", hdd_sizes)
+            left, middle, right = st.columns(3)
+            button = middle.button("Predict Price",use_container_width=True)
+
+        predictor = ProductPricePrediction(df)
+        predictor.train_model()
+        if button:
+            result = {
+                'site': site,
+                'categoria': category,
+                'brand': brand,
+                'brand_model': model,
+                'color': color,
+                'HDD_size': hdd_size,
+                'RAM_size': ram_size
+            }
+
+            result['promocao'] = 0
+            price_without_promotion = predictor.predict_price(result)
+
+            result['promocao'] = 1
+            price_with_promotion = predictor.predict_price(result)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.subheader("Price Without Promotion")
+                st.error(f"€ {price_without_promotion:.2f}")
+            with col2:
+                st.subheader("Price With Promotion")
+                st.success(f"€ {price_with_promotion:.2f}")
+
+
+    elif tab_selection == "Web Site Graph":
         
         df = pd.read_csv('all_prices_extracted_cleaned_categorized_analyzed.csv')
 
@@ -207,84 +261,281 @@ def main():
             analyzer = ProductAnalyzer()
             df_analyzed, insights = analyzer.analyze_dataset(df)
 
-            visualizer = ProductVisualizer(df_analyzed, insights)
-    
-            f = pd.read_csv('all_prices_extracted_cleaned_categorized_analyzed.csv')
-            site_brand_counts = f.groupby('site')['brand'].nunique().sort_values(ascending=False)
-            st.write("Sites with the Most Unique Brands:")
-            st.dataframe(site_brand_counts)
-            
-            brand_site_counts = f.groupby('brand')['site'].nunique().sort_values(ascending=False)
-            st.write("Brands Available on the Most Sites:")
-            st.dataframe(brand_site_counts)
-            
-            st.write("Brands Associated with Each Site")
-            site_brands = f.groupby('site')['brand'].apply(lambda x: list(set(x))).reset_index(name='brands')
-            st.write(site_brands)
-            
-            st.write("Models Associated with Each Brand")
-            brand_models = f.groupby('brand')['brand_model'].apply(lambda x: list(set(x))).reset_index(name='models')
-            st.write(brand_models)
-            
-            st.write("Categories Associated with Each Model")
-            model_categories = f.groupby('model')['categoria'].apply(lambda x: list(set(x))).reset_index(name='categories')
-            st.write(model_categories)
-
             st.title("Visualizations")
 
+            ### ----------------------------------------------- ####  
             st.subheader("Product Distribution by Category")
-            fig = visualizer.plot_category_distribution()  
+            sites_disponiveis = df_analyzed['site'].dropna().unique()
+            site_selecionado = st.multiselect(
+                "Select your Sites:",
+                options=sites_disponiveis,
+                default=sites_disponiveis
+            )
+            df_filtrado = df_analyzed[df_analyzed['site'].isin(site_selecionado)]
+            visualizer_product_destribution = ProductVisualizer(df_filtrado, insights)
+            fig = visualizer_product_destribution.plot_category_distribution()  
             st.plotly_chart(fig)
-            st.write("This chart shows the distribution of products across various categories, helping to identify the most popular product types.")
 
+            #### ----------------------------------------------- ####  
             st.subheader("Market Share by Brand and Category")
-            fig = visualizer.plot_brand_market_share()  
+            sites_disponiveis_to_marketshare = df_analyzed['site'].dropna().unique()
+            site_selecionado_to_marketshare = st.multiselect(
+                "Select your Sites:",
+                options=sites_disponiveis_to_marketshare,
+                default=sites_disponiveis_to_marketshare,
+                key="marketshare_sites"
+            )
+            df_filtrado = df_analyzed[df_analyzed['site'].isin(site_selecionado_to_marketshare)]
+            categorias_disponiveis = df_filtrado['categoria'].dropna().unique()
+            categoria_selecionada = st.multiselect(
+                "Select your Categories:",
+                options=categorias_disponiveis,
+                default=categorias_disponiveis,
+                key="marketshare_categories"
+            )
+            df_filtrado = df_filtrado[df_filtrado['categoria'].isin(categoria_selecionada)]
+            visualizer_market_share = ProductVisualizer(df_filtrado, insights)          
+            fig = visualizer_market_share.plot_brand_market_share()  
             st.plotly_chart(fig)
-            st.write("The market share chart provides insights into which brands dominate specific categories.")
 
-            st.subheader("Price Comparison by Brand and Category")
+            #### ----------------------------------------------- ####  
+
+            st.subheader("Mean Price Comparison by Brand and Category")
+            site_selecionado_to_price_comparison = df_analyzed['site'].dropna().unique()
+            site_selecionado_to_price = st.multiselect(
+                "Select your Sites:",
+                options=site_selecionado_to_price_comparison,
+                default=site_selecionado_to_price_comparison,
+                key="price_comparison_sites"
+            )
+            df_filtrado = df_analyzed[df_analyzed['site'].isin(site_selecionado_to_price)]
+            categorias_disponiveis = df_filtrado['categoria'].dropna().unique()
+            categoria_selecionada = st.multiselect(
+                "Select your Categories:",
+                options=categorias_disponiveis,
+                default=categorias_disponiveis,
+                key="price_comparison_categories"
+            )
+            df_filtrado = df_filtrado[df_filtrado['categoria'].isin(categoria_selecionada)]
+            visualizer = ProductVisualizer(df_filtrado, insights)
             fig = visualizer.plot_price_comparison()  
             st.plotly_chart(fig)
-            st.write("Here, we compare the price ranges of different brands within each category to identify pricing trends.")
 
-            st.subheader("Discount Analysis by Brand")
-            visualizer.plot_discount_analysis()  
-            st.pyplot(plt)
-            st.write("This analysis highlights the average discount rates for each brand, revealing where customers can find the best deals.")
+            #### ----------------------------------------------- ####  
 
             st.subheader("Brand Presence by Site")
-            visualizer.plot_site_brand_presence()  
-            st.pyplot(plt)
-            st.write("This visualization showcases the presence of various brands across different sites, reflecting the diversity of offerings.")
+            site_to_brand_presence = df_analyzed['site'].dropna().unique()
+            site_selecionado_to_brand_presence = st.multiselect(
+                "Select your Sites:",
+                options=site_to_brand_presence,
+                default=site_to_brand_presence,
+                key="brand_presence_sites"
+            )
+            df_filtrado = df_analyzed[df_analyzed['site'].isin(site_selecionado_to_brand_presence)]
+            categorias_disponiveis_brand_presence = df_filtrado['categoria'].dropna().unique()
+            categoria_selecionada_brand_presence = st.multiselect(
+                "Select your Categories:",
+                options=categorias_disponiveis_brand_presence,
+                default=categorias_disponiveis_brand_presence,
+                key="brand_presence_categories"
+            )
+            df_filtrado2 = df_filtrado[df_filtrado['categoria'].isin(categoria_selecionada_brand_presence)]
+            visualizer = ProductVisualizer(df_filtrado2, insights)
+            fig = visualizer.plot_site_brand_presence()  
+            st.plotly_chart(fig)
 
+            #### ----------------------------------------------- ####
             st.subheader("Distribution of Product Models")
+
+            # Seleção de sites
+            sites_disponiveis = df_analyzed['site'].dropna().unique()
+            sites_selecionados = st.multiselect(
+                "Select Sites:",
+                options=sites_disponiveis,
+                default=sites_disponiveis,
+                key="sites_filter"
+            )
+
+            categorias_disponiveis = df_analyzed['categoria'].dropna().unique()
+            categorias_selecionadas = st.multiselect(
+                "Select Categories:",
+                options=categorias_disponiveis,
+                default=categorias_disponiveis,
+                key="categories_filter"
+            )
+
+            df_filtrado = df_analyzed[
+                df_analyzed['site'].isin(sites_selecionados) & 
+                df_analyzed['categoria'].isin(categorias_selecionadas)
+            ]
+
+            visualizer = ProductVisualizer(df_filtrado, insights)
             fig = visualizer.plot_model_series_distribution_iphone8()  
             st.plotly_chart(fig)
-            st.write("This chart focuses on the distribution of specific product models, such as iPhone 8, across the dataset.")
 
-            st.subheader("Temporal Price Analysis for iPhone 8")
-            fig = visualizer.analyze_temporal_for_product("apple", "iphone 8", 64.0, "prateado", "fnac")
-            st.plotly_chart(fig)
-            st.write("This temporal analysis shows price fluctuations for the iPhone 8 over time, providing insights into pricing trends.")
 
-            st.subheader("Temporal Price Analysis for a Set of Products")
-            fig = visualizer.analyze_temporal_for_set_of_products({
-                'iphone_8 - fnac': {'brand': 'apple', 'brand_model': 'iphone 8', 'hdd': 64.0, 'color': 'prateado', 'site': 'fnac'},
-                'galaxy_s8 - fnac': {'brand': 'samsung', 'brand_model': 'galaxy_s 8', 'hdd': 64.0, 'color': 'azul', 'site': 'fnac'},
-                'huawei_p20 - elcorteingles': {'brand': 'huawei', 'brand_model': 'p 20', 'hdd': 128.0, 'color': 'preto', 'site': 'elcorteingles'}
-            })
-            st.plotly_chart(fig)
-            st.write("This analysis compares the temporal price trends of multiple products across different platforms.")
-
-            st.subheader("Discount Distribution Analysis")
-            visualizer.analyze_discount_distribution()  
-            st.pyplot(plt)
-            st.write("This visualization highlights the distribution of discounts applied to products, showing where discounts are most common.")
+            #### ----------------------------------------------- ####
 
             st.subheader("Temporal Price Comparison by Category")
+            categorias_disponiveis = df_analyzed['categoria'].dropna().unique()
+            categorias_selecionadas = st.multiselect(
+                "Select Categories:",
+                options=categorias_disponiveis,
+                default=categorias_disponiveis,
+                key="temporal_price_categories"
+            )
+            df_filtrado = df_analyzed[
+                df_analyzed['categoria'].isin(categorias_selecionadas)
+            ]
+            visualizer = ProductVisualizer(df_filtrado, insights)
             fig = visualizer.compare_temporal_by_category()
             st.plotly_chart(fig)
-            st.write("This chart compares the temporal price trends across various product categories, helping to identify market-wide patterns.")
+
+
+            #### ----------------------------------------------- ####
+
+            visualizer = ProductVisualizer(df_analyzed, insights)
+            st.subheader("Discount Analysis by Brand")
+            fig = visualizer.plot_discount_analysis()  
+            st.plotly_chart(fig)
+
+
+            #### ----------------------------------------------- ####
+
+            st.subheader("Discount Distribution Analysis")
+            categorias_disponiveis = df_analyzed['categoria'].dropna().unique()
+            categorias_selecionadas = st.multiselect(
+                "Select Categories:",
+                options=categorias_disponiveis,
+                default=categorias_disponiveis,
+                key="discount_categories"
+            )
+            df_filtrado_descontos = df_analyzed[
+                df_analyzed['categoria'].isin(categorias_selecionadas)
+            ]
+            visualizer = ProductVisualizer(df_filtrado_descontos, insights)
+            fig = visualizer.analyze_discount_distribution()
+            st.plotly_chart(fig)
+
+            #### ----------------------------------------------- ####
+            st.subheader("Price and Discount Correlation")
+            sites_disponiveis = df_analyzed['site'].dropna().unique()
+            sites_selecionados = st.multiselect(
+                "Select Sites:",
+                options=sites_disponiveis,
+                default=sites_disponiveis,
+                key="price_discount_sites"
+            )
+
+            # Filtrar os dados pelo site selecionado
+            df_filtrado = df_analyzed[
+                df_analyzed['site'].isin(sites_selecionados) & 
+                df_analyzed['discount_percent'] > 0
+            ]
+            visualizer = ProductVisualizer(df_filtrado, insights)
+            fig2 = visualizer.price_discount_correlation()
+            st.plotly_chart(fig2)
+
+            #### ----------------------------------------------- ####
+
+            st.subheader("Most Discounted Products")
+            visualizer = ProductVisualizer(df_analyzed, insights)
+            num_products_options = [1, 5, 10, 20]  # Opções para o usuário escolher o número de promoções
+            num_products = st.selectbox(
+                "Select number of most discounted products to view:",
+                options=num_products_options,
+                index=2,  # Valor padrão (10)
+                key="num_most_discounted"
+            )
+
+            # Criando seleção de sites
+            sites_disponiveis = df_analyzed['site'].dropna().unique()
+            selected_sites = st.multiselect(
+                "Select the sites to focus on:",
+                options=sites_disponiveis,
+                default=sites_disponiveis,
+                key="selected_sites"
+            )
+
+            # Gerando o gráfico com as seleções feitas pelo usuário
+            fig1 = visualizer.products_most_discounted(num_products, selected_sites)
+            st.plotly_chart(fig1)
+
+
+
+
+    elif tab_selection == "Time Series Analysis":
+        df = pd.read_csv('dataset_produts_to_ml.csv')
+        analyzer = TimeSeriesAnalyzer(df)
+
+        category_selection = st.selectbox("Select a Category", df['categoria'].unique())
+        filtered_df = df[df['categoria'] == category_selection]
+
+        product_selection = st.selectbox(
+            "Select a Product",
+            filtered_df.apply(lambda x: f"{x['brand']} {x['brand_model']}", axis=1).unique()
+        )
+
+        brand, brand_model = product_selection.split(' ', 1)  
+
+        selected_product_df = filtered_df[
+            (filtered_df['brand'] == brand) & 
+            (filtered_df['brand_model'] == brand_model)
+        ]
+        selected_product = selected_product_df.iloc[0]
+        result = analyzer.analyze_product(
+            brand=selected_product['brand'],
+            model=selected_product['model'],
+            color=selected_product['color'],
+            category=category_selection,
+            brand_model=selected_product['brand_model'],
+        )
+
+        if result:
+            time_series = result['time_series']
+            forecasts = result['forecasts']
+
+            fig = go.Figure()
+
+            fig.add_trace(go.Scatter(
+                x=time_series.index,
+                y=time_series['min_price'],
+                mode='lines',
+                name='Historical Data'
+            ))
+
+            forecast_dates = pd.date_range(
+                start=time_series.index[-1] + timedelta(days=30), 
+                periods=len(forecasts['forecast']),
+                freq='MS'
+            )
+            fig.add_trace(go.Scatter(
+                x=forecast_dates,
+                y=forecasts['forecast'],
+                mode='lines',
+                name='SARIMA Forecast',
+                line=dict(dash='dash', color='orange')
+            ))
+
+            fig.add_trace(go.Scatter(
+                x=list(forecast_dates) + list(forecast_dates[::-1]),
+                y=list(forecasts['conf_int'][:, 0]) + list(forecasts['conf_int'][:, 1][::-1]),
+                fill='toself',
+                fillcolor='rgba(255, 165, 0, 0.2)',
+                line=dict(color='rgba(255, 165, 0, 0)'),
+                hoverinfo="skip",
+                name='Confidence Interval'
+            ))
+
+            fig.update_layout(
+                title=f"Forecast for {product_selection} - {selected_product['color']} ({category_selection})",
+                xaxis_title="Date",
+                yaxis_title="Price",
+                legend_title="Legend",
+                template="plotly_white"
+            )
+
+            st.plotly_chart(fig)
 
 if __name__ == "__main__":
     main()
