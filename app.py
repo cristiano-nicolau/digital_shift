@@ -60,7 +60,7 @@ def main():
                 'site': site,
                 'categoria': category,
                 'brand': brand,
-                'brand_model': model,
+                'model': model,
                 'color': color,
                 'HDD_size': hdd_size,
                 'RAM_size': ram_size

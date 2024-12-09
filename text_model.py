@@ -796,11 +796,6 @@ class ProductPricePrediction:
         self.price_model.fit(X_train, y_train)
         predictions = self.price_model.predict(X_test)
 
-        print("Price Prediction Metrics:")
-        print(f"MAE: {mean_absolute_error(y_test, predictions)}")
-        print(f"MSE: {mean_squared_error(y_test, predictions)}")
-        print(f"R2 Score: {r2_score(y_test, predictions)}")
-
     def predict_price(self, product_data):
         """Faz a previsão do preço com base nas características do produto."""
         input_df = pd.DataFrame([product_data])

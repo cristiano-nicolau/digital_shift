@@ -266,11 +266,35 @@ fnac,Black Friday,Smartphone,"[829.99, 1069.99]",829.99,1069.99,949.99,120.0,22.
 fnac,Black Friday,Smartphone,"[279.99, 329.99]",279.99,329.99,304.99,25.0,15.151974302251585,apple,iphone,7,iphone 7,prateado,,32.0,20191129
 fnac,Black Friday,Computador,[349.99],349.99,349.99,349.99,0.0,0.0,acer,swift,1,swift 1,,,,20191129
 fnac,Black Friday,Computador,[799.99],799.99,799.99,799.99,0.0,0.0,acer,swift,3,swift 3,,,,20191129
+fnac,Black Friday,Computador,[699.99],699.99,699.99,699.99,0.0,0.0,asus,vivobook,,vivobook,,,,20191129
 fnac,Black Friday,Computador,[1099.99],1099.99,1099.99,1099.99,0.0,0.0,acer,nitro,5,nitro 5,,,,20191129
+fnac,Black Friday,Computador,[1999.9],1999.9,1999.9,1999.9,0.0,0.0,asus,rog,,rog,,,,20191129
+fnac,Black Friday,Computador,[6399.99],6399.99,6399.99,6399.99,0.0,0.0,asus,rog,,rog,,,,20191129
 fnac,Black Friday,Computador,[1399.99],1399.99,1399.99,1399.99,0.0,0.0,hp,pavilion,17,pavilion 17,,,,20191129
-fnac,Black Friday,Computador,[1499.99],1499.99,1499.99,1499.99,0.0,0.0,hp,envy,17,envy 17,,,,20191129
+fnac,Black Friday,Computador,"[1049.99, 1399.99]",1049.99,1399.99,1224.99,175.0,25.00017857270409,lenovo,legion,,legion,,,,20191129
+fnac,Black Friday,Computador,[1299.99],1299.99,1299.99,1299.99,0.0,0.0,hp,omen,,omen,,,,20191129
+fnac,Black Friday,Computador,[1299.99],1299.99,1299.99,1299.99,0.0,0.0,hp,omen,,omen,,,,20191129
+fnac,Black Friday,Computador,[1399.99],1399.99,1399.99,1399.99,0.0,0.0,hp,omen,,omen,,,,20191129
+fnac,Black Friday,Computador,[1499.99],1499.99,1499.99,1499.99,0.0,0.0,hp,envy,,envy,,,,20191129
 fnac,Black Friday,Computador,[1149.99],1149.99,1149.99,1149.99,0.0,0.0,hp,pavilion,15,pavilion 15,,,,20191129
-fnac,Black Friday,Computador,[421.07],421.07,421.07,421.07,0.0,0.0,lenovo,yoga,330,yoga 330,,,4.0,20191129
+fnac,Black Friday,Computador,"[449.99, 599.99]",449.99,599.99,524.99,75.0,25.000416673611227,hp,pavilion,,pavilion,,,,20191129
+fnac,Black Friday,Computador,[749.99],749.99,749.99,749.99,0.0,0.0,hp,pavilion,,pavilion,,,,20191129
+fnac,Black Friday,Computador,"[399.99, 499.99]",399.99,499.99,449.99,50.0,20.00040000800016,lenovo,ideapad,,ideapad,,,,20191129
+fnac,Black Friday,Computador,[289.99],289.99,289.99,289.99,0.0,0.0,lenovo,ideapad,,ideapad,,,4.0,20191129
+fnac,Black Friday,Computador,[338.38],338.38,338.38,338.38,0.0,0.0,lenovo,ideapad,,ideapad,,,,20191129
+fnac,Black Friday,Computador,"[429.99, 699.99]",429.99,699.99,564.99,135.0,38.57197959970857,lenovo,ideapad,,ideapad,,,,20191129
+fnac,Black Friday,Computador,[1432.78],1432.78,1432.78,1432.78,0.0,0.0,lenovo,yoga,,yoga,,,,20191129
+fnac,Black Friday,Computador,[421.07],421.07,421.07,421.07,0.0,0.0,lenovo,yoga,,yoga,,,4.0,20191129
+fnac,Black Friday,Computador,[1799.99],1799.99,1799.99,1799.99,0.0,0.0,lenovo,yoga,,yoga,,,,20191129
+fnac,Black Friday,Computador,[329.99],329.99,329.99,329.99,0.0,0.0,lenovo,ideapad,,ideapad,,,4.0,20191129
+fnac,Black Friday,Computador,[749.0],749.0,749.0,749.0,0.0,0.0,microsoft,surface,go,surface go,dourado,128.0,,20191129
+fnac,Black Friday,Computador,"[935.0, 1169.0]",935.0,1169.0,1052.0,117.0,20.01710863986313,microsoft,surface,laptop,surface laptop,,128.0,,20191129
+fnac,Black Friday,Computador,"[1199.0, 1499.0]",1199.0,1499.0,1349.0,150.0,20.0133422281521,microsoft,surface,laptop,surface laptop,preto,256.0,,20191129
+fnac,Black Friday,Computador,"[969.99, 1069.99]",969.99,1069.99,1019.99,50.0,9.345881737212498,microsoft,surface,pro,surface pro,,128.0,,20191129
+fnac,Black Friday,Computador,"[799.0, 1069.0]",799.0,1069.0,934.0,135.0,25.25724976613657,microsoft,surface,pro,surface pro,,128.0,,20191129
+fnac,Black Friday,Computador,"[1049.0, 1399.0]",1049.0,1399.0,1224.0,175.0,25.017869907076484,microsoft,surface,pro,surface pro,preto,256.0,,20191129
+fnac,Black Friday,Computador,[1699.0],1699.0,1699.0,1699.0,0.0,0.0,microsoft,surface,pro,surface pro,preto,256.0,,20191129
+fnac,Black Friday,Computador,[1499.0],1499.0,1499.0,1499.0,0.0,0.0,microsoft,surface,pro,surface pro,preto,256.0,,20191129
 fnac,Black Friday,Consola,[499.99],499.99,499.99,499.99,0.0,0.0,sony,ps4 pro,,ps4 pro,,,,20191129
 fnac,Black Friday,Consola,[429.99],429.99,429.99,429.99,0.0,0.0,sony,ps4 pro,,ps4 pro,,,,20191129
 fnac,Black Friday,Consola,[338.0],338.0,338.0,338.0,0.0,0.0,sony,ps4 pro,,ps4 pro,,,,20191129
@@ -278,17 +302,24 @@ fnac,Black Friday,Consola,"[249.0, 349.99]",249.0,349.99,299.495,50.495000000000
 fnac,Black Friday,Consola,"[249.0, 349.99]",249.0,349.99,299.495,50.495000000000005,28.855110146004176,sony,ps4 slim,,ps4 slim,,,,20191129
 fnac,Black Friday,Consola,[229.0],229.0,229.0,229.0,0.0,0.0,sony,ps4 slim,,ps4 slim,,500.0,,20191129
 fnac,Black Friday,Consola,"[195.49, 229.99]",195.49,229.99,212.74,17.25,15.000652202269665,xbox,one,,one,,,,20191129
+fnac,Black Friday,Computador,"[449.99, 599.99]",449.99,599.99,524.99,75.0,25.000416673611227,hp,pavilion,,pavilion,,,,20191129
 fnac,Black Friday,Consola,"[59.49, 69.99]",59.49,69.99,64.74,5.2499999999999964,15.002143163309034,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[59.49, 69.99]",59.49,69.99,64.74,5.2499999999999964,15.002143163309034,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,[89.99],89.99,89.99,89.99,0.0,0.0,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[49.99, 69.99]",49.99,69.99,59.99,9.999999999999996,28.575510787255315,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[59.49, 69.99]",59.49,69.99,64.74,5.2499999999999964,15.002143163309034,xbox,one,,one,,,,20191129
+fnac,Black Friday,Computador,[289.99],289.99,289.99,289.99,0.0,0.0,hp,stream,11,stream 11,azul,,,20191129
+fnac,Black Friday,Computador,[299.99],299.99,299.99,299.99,0.0,0.0,hp,stream,11,stream 11,azul,,,20191129
 fnac,Black Friday,Consola,"[59.5, 70.0]",59.5,70.0,64.75,5.25,15.0,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,[39.99],39.99,39.99,39.99,0.0,0.0,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[39.99, 49.99]",39.99,49.99,44.99,5.0,20.004000800160032,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[59.49, 69.99]",59.49,69.99,64.74,5.2499999999999964,15.002143163309034,xbox,one,,one,,,,20191129
+fnac,Black Friday,Computador,[666.76],666.76,666.76,666.76,0.0,0.0,microsoft,surface,go,surface go,dourado,128.0,,20191129
 fnac,Black Friday,Consola,"[50.99, 69.99]",50.99,69.99,60.49,9.499999999999996,27.14673524789255,xbox,one,,one,,,,20191129
+fnac,Black Friday,Computador,[309.66],309.66,309.66,309.66,0.0,0.0,lenovo,ideapad,,ideapad,,,,20191129
 fnac,Black Friday,Consola,"[30.99, 39.99]",30.99,39.99,35.49,4.500000000000002,22.50562640660166,xbox,one,,one,,,,20191129
+fnac,Black Friday,Computador,[2863.07],2863.07,2863.07,2863.07,0.0,0.0,asus,rog,,rog,,,,20191129
+fnac,Black Friday,Computador,[1699.99],1699.99,1699.99,1699.99,0.0,0.0,asus,rog,,rog,,,,20191129
 fnac,Black Friday,Consola,[71.99],71.99,71.99,71.99,0.0,0.0,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[59.99, 119.99]",59.99,119.99,89.99,30.0,50.00416701391782,xbox,one,,one,,,,20191129
 fnac,Black Friday,Consola,"[34.99, 69.99]",34.99,69.99,52.49,17.499999999999996,50.007143877696805,xbox,one,,one,,,,20191129
@@ -341,7 +372,8 @@ worten,Sem Promocao,Smartphone,[1049.0],1049.0,1049.0,1049.0,0.0,0.0,huawei,mate
 worten,Sem Promocao,Consola,[249.99],249.99,249.99,249.99,0.0,0.0,xbox,one,,one,,,,20181109
 worten,Black Friday,Consola,[149.0],149.0,149.0,149.0,0.0,0.0,xbox,one,s,one s,,,,20181123
 worten,Black Friday,Computador,[499.99],499.99,499.99,499.99,0.0,0.0,lenovo,ideapad,330,ideapad 330,,,,20181123
-worten,Black Friday,Computador,[799.99],799.99,799.99,799.99,0.0,0.0,lenovo,yoga,530,yoga 530,,,,20181123
+worten,Black Friday,Computador,[799.99],799.99,799.99,799.99,0.0,0.0,lenovo,yoga,,yoga,,,,20181123
+worten,Black Friday,Computador,[999.0],999.0,999.0,999.0,0.0,0.0,lenovo,legion,,legion,,,,20181123
 worten,Black Friday,Smartphone,[449.99],449.99,449.99,449.99,0.0,0.0,samsung,galaxy_s,8,galaxy_s 8,preto,64.0,,20181123
 worten,Black Friday,Smartphone,[179.99],179.99,179.99,179.99,0.0,0.0,apple,iphone,6,iphone 6,prata,,16.0,20181123
 worten,Black Friday,Smartphone,[259.99],259.99,259.99,259.99,0.0,0.0,apple,iphone,6,iphone 6,dourado,64.0,,20181123
