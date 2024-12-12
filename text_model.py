@@ -639,7 +639,32 @@ class ProductVisualizer:
 
         return fig
 
+    def number_of_products_by_site(self):
+        site_counts = self.df.groupby('site').size().reset_index(name='total_products')
+        site_counts.columns = ['site', 'total_products']
 
+        fig = px.pie(
+            site_counts,
+            values='total_products',
+            names='site',
+            title='Number of Products by Site',
+            labels={'total_products': 'Número de Produtos', 'site': 'Site'}
+        )
+        return fig
+    
+    def compare_promotions(self):
+        promotion_counts = self.df.groupby('promocao').size().reset_index(name='total_products')
+        promotion_counts.columns = ['promocao', 'total_products']
+        
+        fig = px.pie(
+            promotion_counts,
+            values='total_products',
+            names='promocao',
+            title='Number of Products with Promotions',
+            labels={'total_products': 'Número de Produtos', 'promocao': 'Promoção'}
+        )
+        return fig
+    
 
     def products_most_discounted(self, num_products, selected_sites):
         products_discounts = self.df[['site', 'title', 'discount_percent']].dropna()

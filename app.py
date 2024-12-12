@@ -260,8 +260,43 @@ def main():
             df = pd.read_csv(uploaded_file)
             analyzer = ProductAnalyzer()
             df_analyzed, insights = analyzer.analyze_dataset(df)
+            df_analyzed, insights = analyzer.analyze_dataset(df)
+            promotions = {
+                'Saldos Verao': ['06','07', '08', '09'],
+                'Saldos Inverno': ['01','02', '12'],
+                'Black Friday': ['11'],
+            }
+
+            def create_promotion(row):
+                # no caso do produto ter 2 precos na price_list, e na coluna promocao estiver como 'Sem promocao', e na data YYYYMMDD estiver dentro do periodo de promocao, entao a promocao sera a key do dicionario
+                if row['min_price'] != row['max_price'] and row['promocao'] == 'Sem Promocao':
+                    for promotion, months in promotions.items():
+                        if str(row['date'])[4:6] in months:
+                            return promotion
+                return row['promocao']
+
+
+            df_analyzed['promocao'] = df_analyzed.apply(create_promotion, axis=1)
 
             st.title("Visualizations")
+
+            ### ----------------------------------------------- ####
+            select = [
+                'Number of Products by Site', 
+                'Comparison of Products on Promotion', 
+            ]
+            vis = st.selectbox("Select a Visualization", select)
+            sites_disponiveis = df_analyzed['site'].dropna().unique()
+            site_selecionado = st.multiselect("Select your Site:", sites_disponiveis, default=sites_disponiveis, key="site_selection")
+            df_filtrado = df_analyzed[df_analyzed['site'].isin(site_selecionado)]
+            visualizer = ProductVisualizer(df_filtrado, insights)
+            
+            if vis == 'Number of Products by Site':
+                fig = visualizer.number_of_products_by_site()
+            elif vis == 'Comparison of Products on Promotion':
+                fig = visualizer.compare_promotions()
+
+            st.plotly_chart(fig)
 
             ### ----------------------------------------------- ####  
             st.subheader("Product Distribution by Category")
