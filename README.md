@@ -31,15 +31,12 @@ The main objectives of this project are:
 The methodology for this project involves the following steps:
 
 1. **Data Collection**: Use the Arquivo.pt API to retrieve archived versions of e-commerce websites for major electronics retailers in Portugal.
-2. **Data Preprocessing**: Clean and structure the data to extract relevant information about product offerings, prices, and platform features.
-3. **Data Analysis**: Analyze the data to identify trends in product categories, pricing, and platform functionalities over time.
-4. **Data Visualization**: Create visualizations (e.g., charts, graphs) to present the findings and insights from the analysis.
+2. **Data Preprocessing**: Clean and structure the title and clean the duplicated data.
+3. **Data Categurization**: Categorize the data into product categories, brands, and other relevant attributes to facilitate analysis.
+4. **Data Analysis**: Analyze the data to identify trends in product categories, pricing, and platform functionalities over time.
+5. **Data Visualization**: Create visualizations (e.g., charts, graphs) to present the findings and insights from the analysis.
+6. **Data Prediction**: Predict the prices of the products in the future based on the historical data.
 
-## Expected Results
-
-We expect to uncover valuable insights into the evolution of e-commerce in Portugal, particularly in the electronics sector. By comparing product offerings, prices, and platform features across different retailers, we aim to provide a comprehensive overview of how the industry has changed over time.
-
-The results of this analysis will shed light on the strategies adopted by retailers to attract customers, improve user experience, and stay competitive in the market. Additionally, we hope to identify patterns in consumer behavior and preferences that have influenced the development of e-commerce platforms in Portugal.
 
 ## Packages
 
@@ -52,14 +49,45 @@ The results of this analysis will shed light on the strategies adopted by retail
 
 ## Directory Structure && Files
 
--`digital_shift.ipynb`: Jupyter notebook explaining the project's context, goals, methodology, and expected results.
+- `presentation` : Contains the presentation slides for the project.
 - `data/`: Contains the data files used in the project.
-- `data_extractor.ipynb`: Jupyter notebook for extracting data from Arquivo.pt using the Arquivo.pt API.
-- `data_processor.ipynb`: Jupyter notebook for preprocessing and web scraping the data acquired from Arquivo.pt.
-- `text_processor.ipynb`: Jupyter notebook for text processing and analysis of the data.
+- `links_extraction.ipynb`: Jupyter notebook for extracting the links from the Arquivo.pt API.
+- `initial_data_analysis.ipynb`: Jupyter notebook for the initial data analysis.
+- `web_scrapper.ipynb`: Jupyter notebook for web scraping the data from Arquivo.pt links.
+- `data_processor.ipynb`: Jupyter notebook for processing the data and clean the data.
+- `categorization_model.ipynb`: Jupyter notebook for categorizing the data, in categories, brands, and other relevant attributes.
+- `ml.ipynb`: Jupyter notebook for predicting the prices of the products in the future based on the historical data.
+- `app.py`: Streamlit application for the project.
+
+## How to run the project
+
+1. Clone the repository:
+
+```bash
+git clone git@github.com:cristiano-nicolau/digital_shift.git
+```
+
+2. Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the Streamlit application:
+
+```bash
+streamlit run app.py
+```
+
+4. Open the browser and go to the following URL:
+
+```
+http://localhost:8501
+```
+
+If you want you can see the streamlit application running [here](https://digital-shift.streamlit.app)
+
 
 ## Team Members
-
 - [Cristiano Nicolau, 108536](mailto:cristianonicolau@ua.pt)
-- [Tiago Cruz, 108615](mailto:tiagofcruz78@ua.pt)
 
