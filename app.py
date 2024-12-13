@@ -275,7 +275,6 @@ def main():
                             return promotion
                 return row['promocao']
 
-
             df_analyzed['promocao'] = df_analyzed.apply(create_promotion, axis=1)
 
             st.title("Visualizations")

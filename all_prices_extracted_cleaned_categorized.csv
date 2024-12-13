@@ -21,7 +21,7 @@ elcorteingles,20190422,Smartphone Apple iPhone Xs 64GB Space Grey ,[1179.0],Sem 
 elcorteingles,20190422,Smartphone Huawei Mate 20 Lite Azul ,[349.9],Sem Promocao,Smartphone
 elcorteingles,20190422,Smartphone Huawei Mate 20 Lite Preto ,[349.9],Sem Promocao,Smartphone
 elcorteingles,20190422,Smartphone Huawei P20 PRO 128 GB Preto ,"[559.9, 799.9]",Sem Promocao,Smartphone
-elcorteingles,20190906,Jogos PlayStation 4 PlayStation Gaming ,"[44.99, 69.99]",Sem Promocao,Computador
+elcorteingles,20190906,Jogos PlayStation 4 PlayStation Gaming ,"[44.99, 69.99]",Sem Promocao,Consola
 elcorteingles,20190906,Smartphone Apple iPhone XR 128GB Black ,[939.0],Sem Promocao,Smartphone
 elcorteingles,20190906,Smartphone Apple iPhone XR 64GB White ,[879.0],Sem Promocao,Smartphone
 elcorteingles,20190906,Smartphone Apple iPhone Xs 64GB Gold ,[1179.0],Sem Promocao,Smartphone
@@ -29,9 +29,9 @@ elcorteingles,20190906,Smartphone Apple iPhone Xs Max 64GB Space Grey ,[1279.0],
 elcorteingles,20190906,"Smartphone Huawei P30 Pro, 8GB, 128GB Crystal ","[789.99, 999.9]",Sem Promocao,Smartphone
 elcorteingles,20190906,"Smartphone Huawei P30, 6GB, 128GB Black ","[619.99, 799.9]",Sem Promocao,Smartphone
 elcorteingles,20191129,Consolas XBOX Xbox Gaming ,"[199.0, 299.99]",Black Friday,Consola
-elcorteingles,20191129,Gaming ,"[9.99, 39.99]",Black Friday,Computador
-elcorteingles,20191129,Jogos PlayStation 4 PlayStation Gaming ,"[49.99, 69.99]",Black Friday,Computador
-elcorteingles,20191129,Jogos PlayStation 4 PlayStation Gaming ,"[49.99, 69.99]",Sem Promocao,Computador
+elcorteingles,20191129,Gaming ,"[9.99, 39.99]",Black Friday,Outros
+elcorteingles,20191129,Jogos PlayStation 4 PlayStation Gaming ,"[49.99, 69.99]",Black Friday,Consola
+elcorteingles,20191129,Jogos PlayStation 4 PlayStation Gaming ,"[49.99, 69.99]",Sem Promocao,Consola
 elcorteingles,20191129,Jogos XBOX One Xbox Gaming ,[69.99],Black Friday,Consola
 elcorteingles,20191129,Jogos XBOX One Xbox Gaming ,[69.99],Sem Promocao,Consola
 elcorteingles,20191129,Jogos XBOX One Xbox Gaming  Página 2,"[29.99, 44.99]",Black Friday,Consola
@@ -365,7 +365,7 @@ fnac,20191129,Apple iPhone XS 64GB Dourado,"[829.99, 1069.99]",Black Friday,Smar
 fnac,20191129,Apple iPhone XS 64GB Prateado,"[829.99, 1069.99]",Black Friday,Smartphone
 fnac,20191129,Apple iphone 7 32GB Prateado Recondicionado Grade A,"[279.99, 329.99]",Black Friday,Smartphone
 fnac,20191129,Assassin’s Creed: The Rebel Collection Nintendo Switch Jogo,"[42.49, 49.99]",Black Friday,Outros
-fnac,20191129,Auscultadores Gaming Razer Kraken X Multi-Plataformas,"[49.99, 59.99]",Black Friday,Computador
+fnac,20191129,Auscultadores Gaming Razer Kraken X Multi-Plataformas,"[49.99, 59.99]",Black Friday,Outros
 fnac,20191129,Bayonetta 3 Nintendo Switch Jogo,"[59.49, 69.99]",Black Friday,Outros
 fnac,20191129,Call Of Duty Modern Warfare Remastered PS4 Jogo,"[49.99, 69.99]",Black Friday,Consola
 fnac,20191129,Call Of Duty: Modern Warfare Steelbook PS4 Jogo,[5.0],Black Friday,Consola
@@ -387,7 +387,7 @@ fnac,20191129,Computador Portátil Gaming Asus ROG G703GS-78D07CB2,[1999.9],Blac
 fnac,20191129,Computador Portátil Gaming Asus ROG Mothership GZ700GX-99D28CP1,[6399.99],Black Friday,Computador
 fnac,20191129,Computador Portátil Gaming HP Pavilion 17-cd0001np,[1399.99],Black Friday,Computador
 fnac,20191129,Computador Portátil Gaming Lenovo Legion Y540-15IRH-PG0- 901,"[1049.99, 1399.99]",Black Friday,Computador
-fnac,20191129,Computador Portátil Gaming MSI GP75 Leopard 9SE-1091PT,[1899.99],Black Friday,Computador
+fnac,20191129,Computador Portátil Gaming MSI GP75 Leopard 9SE-1091PT,[1899.99],Black Friday,Outros
 fnac,20191129,Computador Portátil Gaming OMEN by HP 15-dc0056np,[1299.99],Black Friday,Computador
 fnac,20191129,Computador Portátil Gaming OMEN by HP 15-dc0057np,[1299.99],Black Friday,Computador
 fnac,20191129,Computador Portátil Gaming OMEN by HP 17-an100np,[1399.99],Black Friday,Computador
@@ -642,7 +642,7 @@ worten,20181109,Smartphone APPLE iPhone XS 256 GB Dourado,[1349.0],Sem Promocao,
 worten,20181109,Smartphone APPLE iPhone XS 64 GB Prateado,[1179.0],Sem Promocao,Smartphone
 worten,20181109,Smartphone HUAWEI Mate 20 Pro 128GB Preto,[1049.0],Sem Promocao,Smartphone
 worten,20181109,Xbox One Consolas Xbox,[249.99],Sem Promocao,Consola
-worten,20181123,Cadeira Gaming SPARCO Stint Preto e Vermelho,[354.99],Black Friday,Computador
+worten,20181123,Cadeira Gaming SPARCO Stint Preto e Vermelho,[354.99],Black Friday,Outros
 worten,20181123,Cartão Memória MicroSDHC SANDISK 128GB Ultra A1 100MB/s,[19.99],Black Friday,Outros
 worten,20181123,Cartão Memória MicroSDHC SANDISK 64GB Ultra A1 100MB/s,[12.99],Black Friday,Outros
 worten,20181123,Consola XBOX ONE S 1TB + Fortnite,[149.0],Black Friday,Consola
@@ -652,7 +652,7 @@ worten,20181123,Disco Externo HDD  TOSHIBA USB 3.0 Canvio Basic 2 TB,[64.0],Blac
 worten,20181123,Disco Externo SEAGATE Backup Plus HUB 6TB,[119.99],Black Friday,Outros
 worten,20181123,Disco Externo WD  ELEMENTS 1TB USB 3.0,[69.99],Black Friday,Outros
 worten,20181123,Impressora Foto HP Sprocket,[74.99],Black Friday,Computador
-worten,20181123,Monitor Gaming LED 24 AOC C24G1,[300.0],Black Friday,Computador
+worten,20181123,Monitor Gaming LED 24 AOC C24G1,[300.0],Black Friday,Outros
 worten,20181123,Monitor LED 24 HP 24O 1ms,[89.0],Black Friday,Computador
 worten,20181123,Monitor LED IPS 24 HP 24F,[119.99],Black Friday,Computador
 worten,20181123,Pack Portátil HP 14 14-CB055NP,[299.99],Black Friday,Computador
@@ -661,7 +661,7 @@ worten,20181123,Pen USB PNY 64GB Attaché4,[9.99],Black Friday,Outros
 worten,20181123,Portátil  LENOVO IdeaPad 330-15IKB-182,[499.99],Black Friday,Computador
 worten,20181123,Portátil 14 LENOVO Yoga 530-14IKB,[799.99],Black Friday,Computador
 worten,20181123,Portátil Gaming  LENOVO Legion Y530-15ICH-196,[999.0],Black Friday,Computador
-worten,20181123,Rato Gaming RAZER Deathadder Elite,[86.32],Black Friday,Computador
+worten,20181123,Rato Gaming RAZER Deathadder Elite,[86.32],Black Friday,Outros
 worten,20181123,Recondicionado Coluna Hi-Fi NAIM Muso QB,[499.99],Black Friday,Outros
 worten,20181123,Recondicionado Smartphone Samsung Galaxy S7 32GB Prateado,[299.99],Black Friday,Smartphone
 worten,20181123,Recondicionado Smartphone Samsung Galaxy S7 32GB Preto,[299.99],Black Friday,Smartphone

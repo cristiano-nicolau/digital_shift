@@ -75,7 +75,6 @@ class ProductAnalyzer:
             'jbl' : r'jbl',
             'logitech' : r'logitech',
             'delonghi' : r'delonghi',
-            'nespresso' : r'nespresso',
             'philips' : r'philips',
             'delta' : r'delta|delta\sq',
             'krups' : r'krups',
@@ -83,6 +82,24 @@ class ProductAnalyzer:
         }
 
         self.model_patterns = {
+            'delonghi': {
+            'essenza': r'essenza',
+            'en': r'en\s*(\d+)',
+            'inissia': r'inissia',
+            'essenza_mini': r'essenza\s*mini',
+            'lattissima': r'lattissima',
+            },
+            'delta' : {
+            'q': r'qool | quick',
+            },
+            'krups' : {
+            'essenza': r'essenza',
+            'en': r'en\s*(\d+)',
+            'inissia': r'inissia',
+            'essenza_mini': r'essenza\s*mini',
+            'lattissima': r'lattissima',
+            'gusto': r'gusto',
+            },
             'apple': {
             'iphone': r'iphone\s*(\d+|x\s|xr|xs|pro|max|mini|se)',
             'ipad': r'ipad\s*(\d+|pro|air|mini)',
@@ -98,10 +115,11 @@ class ProductAnalyzer:
             'nova': r'nova\s*(\d+)',
             },
             'hp': {
-            'omen': r'omen\s*(\d+)',
-            'pavilion': r'pavilion\s*(\d+)',
-            'envy': r'envy\s*(\d+)',
-            'spectre': r'spectre\s*(\d+)',
+            'omen': r'\s*omen\s*',
+            'pavilion': r'pavilion\s*(\d+)|pavilion',
+            'envy': r'envy\s*(\d+) | envy',
+            'spectre': r'spectre\s*(\d+) | spectre',
+            'stream' : r'stream\s*(\d+)',
             },
             'acer': {
             'aspire': r'aspire\s*(\d+)',
@@ -109,23 +127,26 @@ class ProductAnalyzer:
             'nitro': r'nitro\s*(\d+)',
             'swift': r'swift\s*(\d+)',
             },
+            'microsoft': {
+            'surface': r'surface\s*(go|pro|x|laptop)',
+            },
             'dell': {
-            'inspiron': r'inspiron\s*(\d+)',
-            'xps': r'xps\s*(\d+)',
+            'inspiron': r'inspiron|inspiron\s*(\d+)',
+            'xps': r'xps\s*(\d+) | xps',
             'latitude': r'latitude\s*(\d+)',
             'alienware': r'alienware\s*(\d+)',
             },
             'asus': {
-            'rog': r'rog\s*(\d+)',
-            'zenbook': r'zenbook\s*(\d+)',
-            'vivobook': r'vivobook\s*(\d+)',
-            'tuf': r'tuf\s*(\d+)',
+            'rog': r'rog\s*(\d+) | rog',
+            'zenbook': r'zenbook\s*(\d+) | zenbook',
+            'vivobook': r'vivobook\s*(\d+) | vivobook',
+            'tuf': r'tuf\s*(\d+) | tuf',
             },
             'lenovo': {
-            'thinkpad': r'thinkpad\s*(\d+)',
-            'ideapad': r'ideapad\s*(\d+)',
-            'legion': r'legion\s*(\d+)',
-            'yoga': r'yoga\s*(\d+)',
+            'thinkpad': r'thinkpad\s*(\d+)| thinkpad',
+            'ideapad': r'ideapad | ideapad\s*(\d+)',
+            'legion': r'legion | legion\s*(\d+)',
+            'yoga': r'yoga|yoga\s*(\d+)',
             },
             'xiaomi': {
             'mi': r'mi\s*(\d+)',
